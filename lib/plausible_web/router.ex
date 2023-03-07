@@ -98,6 +98,35 @@ defmodule PlausibleWeb.Router do
     get "/timeseries", ExternalStatsController, :timeseries
   end
 
+  scope "/api/v1/full/stats", PlausibleWeb.Api do
+    pipe_through [:public_api, PlausibleWeb.AuthorizeStatsApiPlug]
+
+    get "/current-visitors", StatsController, :current_visitors
+    get "/main-graph", StatsController, :main_graph
+    get "/top-stats", StatsController, :top_stats
+    get "/sources", StatsController, :sources
+    get "/utm_mediums", StatsController, :utm_mediums
+    get "/utm_sources", StatsController, :utm_sources
+    get "/utm_campaigns", StatsController, :utm_campaigns
+    get "/utm_contents", StatsController, :utm_contents
+    get "/utm_terms", StatsController, :utm_terms
+    get "/referrers/:referrer", StatsController, :referrer_drilldown
+    get "/pages", StatsController, :pages
+    get "/entry-pages", StatsController, :entry_pages
+    get "/exit-pages", StatsController, :exit_pages
+    get "/countries", StatsController, :countries
+    get "/regions", StatsController, :regions
+    get "/cities", StatsController, :cities
+    get "/browsers", StatsController, :browsers
+    get "/browser-versions", StatsController, :browser_versions
+    get "/operating-systems", StatsController, :operating_systems
+    get "/operating-system-versions", StatsController, :operating_system_versions
+    get "/screen-sizes", StatsController, :screen_sizes
+    get "/conversions", StatsController, :conversions
+    get "/property/:prop_name", StatsController, :prop_breakdown
+    get "/suggestions/:filter_name", StatsController, :filter_suggestions
+  end
+
   scope "/api/v1/sites", PlausibleWeb.Api do
     pipe_through [:public_api, PlausibleWeb.AuthorizeSitesApiPlug]
 
