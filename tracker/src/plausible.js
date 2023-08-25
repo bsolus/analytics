@@ -37,7 +37,7 @@
         return warn('localStorage flag')
       }
     } catch (e) {
-
+      return warn(e)
     }
     {{#if exclusions}}
     var dataIncludeAttr = scriptEl && scriptEl.getAttribute('data-include')
